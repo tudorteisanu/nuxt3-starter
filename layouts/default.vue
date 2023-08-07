@@ -1,42 +1,60 @@
 <template>
   <v-card>
     <v-layout>
+      <v-app-bar
+        color="primary"
+        prominent
+      >
+        <v-app-bar-nav-icon
+          variant="text"
+          data-test="menu-toggle"
+          @click.stop="drawer = !drawer"
+        />
+        <v-toolbar-title>My files</v-toolbar-title>
+        <v-spacer />
+        <v-btn
+          variant="text"
+          icon="mdi-magnify"
+        />
+        <v-btn
+          variant="text"
+          icon="mdi-filter"
+        />
+        <v-btn
+          variant="text"
+          icon="mdi-dots-vertical"
+        />
+      </v-app-bar>
+
       <v-navigation-drawer
         v-model="drawer"
-        :rail="rail"
-        permanent
-        @click="rail = false"
+        location="left"
+        temporary
       >
-        <v-list-item
-          prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg"
-          title="John Leider"
-          nav
+        <v-list
+          data-test="menu-items"
+          link
         >
-          <template #append>
-            <v-btn
-              variant="text"
-              icon="mdi-chevron-left"
-              @click.stop="rail = !rail"
-            />
-          </template>
-        </v-list-item>
-
-        <v-divider />
-
-        <v-list density="compact" nav>
-          <v-list-item prepend-icon="mdi-home-city" title="Home" to="/" />
-          <v-list-item prepend-icon="mdi-account" title="About" to="/about" />
+          <v-list-item
+            v-for="item in sideMenu"
+            :key="item.title"
+            :title="item.title"
+            :to="item.to"
+          />
         </v-list>
       </v-navigation-drawer>
+
       <v-main style="height: 100vh">
-        <TheHeader />
-        <slot />
+        <v-card-text>
+          <slot />
+        </v-card-text>
       </v-main>
     </v-layout>
   </v-card>
 </template>
 
 <script setup>
-const drawer = ref(true);
-const rail = ref(true);
+import { sideMenu } from '@/config/menu';
+
+const drawer = ref(false);
 </script>
