@@ -1,15 +1,21 @@
-import { ref } from 'vue'
+import { ref } from 'vue';
 
-export const useCounter = () => {
-  const count = ref(0)
-
-  const increment = () => {
-    count.value++
-  }
-
-  const decrement = () => {
-    count.value--
-  }
-
-  return { count, increment, decrement }
+interface CounterInterface {
+	count: Ref<number>;
+	increment: () => void;
+	decrement: () => void;
 }
+
+export const useCounter = (): CounterInterface => {
+	const count = ref(0);
+
+	const increment = () => {
+		count.value++;
+	};
+
+	const decrement = () => {
+		count.value--;
+	};
+
+	return { count, increment, decrement };
+};
