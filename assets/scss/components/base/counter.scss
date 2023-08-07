@@ -1,0 +1,17 @@
+.counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    button {
+        background: transparent;
+        width: 30px;
+        height: 30px;
+        border: 1px solid $borderColor;
+        border-radius: $borderRadius;
+    }
+
+    span {
+        margin: 0 10px;
+    }
+}
