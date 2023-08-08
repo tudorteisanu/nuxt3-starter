@@ -10,8 +10,9 @@ export const sideMenu = [
 		to: '/about',
 	},
 	{
-		title: 'Fizz',
-		value: 'fizz',
+		title: 'Users',
+		value: 'users',
+		to: '/users',
 	},
 	{
 		title: 'Buzz',
