@@ -21,7 +21,7 @@ jobs:
         with:
           name: build
           if-no-files-found: error
-          path: dist
+          path: .output
 
   cypress-run:
     runs-on: ubuntu-22.04
@@ -34,7 +34,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: build
-          path: dist
+          path: .output
 
       - name: Cypress run
         uses: cypress-io/github-action@v5
