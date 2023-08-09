@@ -2,20 +2,19 @@ export const sideMenu = [
 	{
 		title: 'Home',
 		to: '/',
+		icon: 'mdi-home',
 		value: 'home',
 	},
 	{
 		title: 'About',
 		value: 'about',
 		to: '/about',
+		icon: 'mdi-information-outline',
 	},
 	{
 		title: 'Users',
 		value: 'users',
 		to: '/users',
-	},
-	{
-		title: 'Buzz',
-		value: 'buzz',
+		icon: 'mdi-account-multiple',
 	},
 ];

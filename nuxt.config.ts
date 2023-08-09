@@ -1,3 +1,5 @@
+import { version } from './package.json';
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 	devtools: { enabled: true },
@@ -26,6 +28,11 @@ export default defineNuxtConfig({
 					additionalData: '@import "@/assets/scss/_variables.scss";',
 				},
 			},
+		},
+	},
+	runtimeConfig: {
+		public: {
+			version,
 		},
 	},
 });

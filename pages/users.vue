@@ -9,6 +9,9 @@
 </template>
 
 <script setup>
+useHead({
+	title: 'Users',
+});
 const itemsPerPage = ref(10);
 const headers = [
 	{

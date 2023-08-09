@@ -10,4 +10,7 @@
 definePageMeta({
 	middleware: 'auth',
 });
+useHead({
+	title: 'Home',
+});
 </script>
