@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-const itemsPerPage = 10;
+const itemsPerPage = ref(10);
 const headers = [
 	{
 		title: 'Dessert (100g serving)',
