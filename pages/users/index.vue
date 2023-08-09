@@ -1,11 +1,24 @@
 <template>
-  <v-data-table
-    v-model:items-per-page="itemsPerPage"
-    :headers="headers"
-    :items="users"
-    item-value="name"
-    class="elevation-3"
-  />
+  <v-card>
+    <v-card-title>
+      <div class="d-flex justify-between">
+        <div class="text-bold">
+          Users catalogue
+        </div>
+        <div class="ml-auto">
+          <v-icon>mdi-filter</v-icon>
+        </div>
+      </div>
+    </v-card-title>
+    <v-card-text>
+      <v-data-table
+        v-model:items-per-page="itemsPerPage"
+        :headers="headers"
+        :items="users"
+        item-value="name"
+      />
+    </v-card-text>
+  </v-card>
 </template>
 
 <script setup>
