@@ -44,16 +44,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-
-      - name: Check out
-        uses: actions/checkout@v2
-
       - name: Download the build folder
         uses: actions/download-artifact@v3
         with:
           name: build
           path: .output
-     
+
       - name: Login to Github Packages
         uses: docker/login-action@v1
         with:
