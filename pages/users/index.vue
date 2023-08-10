@@ -6,12 +6,9 @@ useHead({
 
 <template>
   <v-card>
-    <div class="text-bold">
-      Users catalogue
-    </div>
     <v-card-title>
       <div class="d-flex justify-between">
-        <v-btn to="/users/create">
+        <v-btn to="/users/create" color="primary">
           Create User
         </v-btn>
         <div class="ml-auto">

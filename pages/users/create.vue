@@ -3,7 +3,20 @@ useHead({
 	title: 'Create user',
 });
 const form = ref({});
+const isFormValid = ref(false);
 const { $validationRules } = useNuxtApp();
+const { addUser } = useUsers();
+const router = useRouter();
+
+const submit = () => {
+	if (!isFormValid) {
+		return;
+	}
+
+	addUser(form.value).then(() => {
+		router.push('/users');
+	});
+};
 </script>
 
 <template>
@@ -12,7 +25,10 @@ const { $validationRules } = useNuxtApp();
       Create User
     </v-card-title>
     <v-card-text>
-      <v-form v-model="valid">
+      <v-form
+        v-model="isFormValid"
+        @submit.prevent="submit"
+      >
         <v-container>
           <v-row>
             <v-col

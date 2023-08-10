@@ -15,6 +15,10 @@ const headers: HeaderInterface<UserInterface>[] = [
 		key: 'lastname',
 	},
 	{
+		title: 'Email',
+		key: 'email',
+	},
+	{
 		title: '',
 		key: 'actions',
 		align: 'end',
