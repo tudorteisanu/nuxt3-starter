@@ -1,3 +1,13 @@
+<script setup>
+definePageMeta({
+	layout: 'default',
+	middleware: ['auth'],
+});
+useHead({
+	title: 'Home',
+});
+</script>
+
 <template>
   <div>
     <div>
@@ -5,12 +15,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-definePageMeta({
-	middleware: 'auth',
-});
-useHead({
-	title: 'Home',
-});
-</script>

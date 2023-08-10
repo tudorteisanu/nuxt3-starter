@@ -1,9 +1,17 @@
 <script setup>
 useHead({
-	title: 'Create user',
+	title: 'Login',
 });
-const form = ref({});
+const form = ref({
+	password: '1s2ASD3d4@5678',
+	email: 'test@domain.com',
+});
 const { $validationRules } = useNuxtApp();
+const { login } = useAuth();
+
+const submit = () => {
+	login(form.value);
+};
 </script>
 
 <template>
@@ -12,7 +20,7 @@ const { $validationRules } = useNuxtApp();
       Create User
     </v-card-title>
     <v-card-text>
-      <v-form v-model="valid">
+      <v-form @submit.prevent="submit">
         <v-container>
           <v-row>
             <v-col
@@ -20,32 +28,28 @@ const { $validationRules } = useNuxtApp();
               class="mt-0"
             >
               <v-text-field
-                v-model="form.firstname"
-                :rules="[$validationRules.required]"
-                label="First name"
-                required
-              />
-            </v-col>
-            <v-col
-              cols="12"
-              class="mt-0"
-            >
-              <v-text-field
-                v-model="form.lastname"
-                :rules="[$validationRules.required]"
-                label="Last name"
-                required
-              />
-            </v-col>
-            <v-col
-              cols="12"
-              class="mt-0"
-            >
-              <v-text-field
                 v-model="form.email"
-                :rules="[$validationRules.required]"
+                :rules="[
+                  $validationRules.required,
+                  $validationRules.email,
+                ]"
                 label="E-mail"
                 required
+              />
+            </v-col>
+            <v-col
+              cols="12"
+              class="mt-0"
+            >
+              <v-text-field
+                v-model="form.password"
+                :rules="[
+                  $validationRules.required,
+                  $validationRules.maxLength(256),
+                  $validationRules.minLength(8)
+                ]"
+                label="Password"
+                type="password"
               />
             </v-col>
             <v-col

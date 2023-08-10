@@ -1,6 +1,6 @@
 <script setup>
 useHead({
-	title: 'Create user',
+	title: 'Login',
 });
 const form = ref({});
 const { $validationRules } = useNuxtApp();
@@ -21,7 +21,11 @@ const { $validationRules } = useNuxtApp();
             >
               <v-text-field
                 v-model="form.firstname"
-                :rules="[$validationRules.required]"
+                :rules="[
+                  $validationRules.required,
+                  $validationRules.minLength(2),
+                  $validationRules.maxLength(256),
+                ]"
                 label="First name"
                 required
               />
@@ -32,7 +36,11 @@ const { $validationRules } = useNuxtApp();
             >
               <v-text-field
                 v-model="form.lastname"
-                :rules="[$validationRules.required]"
+                :rules="[
+                  $validationRules.required,
+                  $validationRules.minLength(2),
+                  $validationRules.maxLength(256),
+                ]"
                 label="Last name"
                 required
               />
@@ -43,7 +51,25 @@ const { $validationRules } = useNuxtApp();
             >
               <v-text-field
                 v-model="form.email"
-                :rules="[$validationRules.required]"
+                :rules="[
+                  $validationRules.required,
+                  $validationRules.email,
+                ]"
+                label="E-mail"
+                required
+              />
+            </v-col>
+            <v-col
+              cols="12"
+              class="mt-0"
+            >
+              <v-text-field
+                v-model="form.password"
+                :rules="[
+                  $validationRules.required,
+                  $validationRules.maxLength(256),
+                  $validationRules.minLength(8)
+                ]"
                 label="E-mail"
                 required
               />

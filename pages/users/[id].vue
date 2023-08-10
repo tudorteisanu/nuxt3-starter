@@ -1,18 +1,36 @@
 <script setup>
-useHead({
-	title: 'Create user',
-});
 const form = ref({});
 const { $validationRules } = useNuxtApp();
+const { getUserById, updateUserById } = useUsers();
+const route = useRoute();
+const router = useRouter();
+const userId = Number(route.params.id);
+
+onMounted(() => {
+	getUserById(userId).then((user) => {
+		if (user) {
+			form.value = user;
+			useHead({
+				title: `Editing: ${user.firstname} ${user.lastname}`,
+			});
+		}
+	});
+});
+
+const submit = () => {
+	updateUserById(userId, form.value).then(() => {
+		router.push('/users');
+	});
+};
 </script>
 
 <template>
   <v-card style="max-width: 400px;" class="mx-auto mt-10">
     <v-card-title class="text-center">
-      Create User
+      Edit User
     </v-card-title>
     <v-card-text>
-      <v-form v-model="valid">
+      <v-form v-model="valid" @submit.prevent="submit">
         <v-container>
           <v-row>
             <v-col
@@ -21,7 +39,7 @@ const { $validationRules } = useNuxtApp();
             >
               <v-text-field
                 v-model="form.firstname"
-                :rules="[$validationRules.required]"
+                :rules="[$validationRules.required, $validationRules.minLength(2)]"
                 label="First name"
                 required
               />
