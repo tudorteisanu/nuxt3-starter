@@ -3,7 +3,7 @@ const required = (value: string): boolean | string => {
 };
 
 const email = (value: string): boolean | string => {
-	return /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) || 'Must be a valid email!';
+	return /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/.test(value) || 'Must be a valid email!';
 };
 
 const minLength = (length: number) => (value: string): boolean | string => {

@@ -1,41 +1,55 @@
 <script setup>
 const form = ref({});
 const { $validationRules } = useNuxtApp();
-const { getUserById, updateUserById } = useUsers();
+const {
+  getUserById,
+  updateUserById
+} = useUsers();
 const route = useRoute();
 const router = useRouter();
 const userId = Number(route.params.id);
 
+const isFormValid = ref(false);
+
 onMounted(() => {
-	getUserById(userId).then((user) => {
-		if (user) {
-			form.value = user;
-			useHead({
-				title: `Editing: ${user.firstname} ${user.lastname}`,
-			});
-		}
-	});
+  getUserById(userId).then((user) => {
+    if (user) {
+      form.value = user;
+      useHead({
+        title: `Editing: ${user.firstname} ${user.lastname}`,
+      });
+    }
+  });
 });
 
-const submit = () => {
-	updateUserById(userId, form.value).then(() => {
-		router.push('/users');
-	});
+const submit = async () => {
+  if (!isFormValid.value) {
+    return;
+  }
+
+  await updateUserById(userId, form.value)
+  await router.push('/users');
 };
 </script>
 
 <template>
-  <v-card style="max-width: 400px;" class="mx-auto mt-10">
+  <v-card
+    class="mx-auto mt-10"
+    style="max-width: 400px;"
+  >
     <v-card-title class="text-center">
       Edit User
     </v-card-title>
     <v-card-text>
-      <v-form v-model="valid" @submit.prevent="submit">
+      <v-form
+        v-model="valid"
+        @submit.prevent="submit"
+      >
         <v-container>
           <v-row>
             <v-col
-              cols="12"
               class="mt-0"
+              cols="12"
             >
               <v-text-field
                 v-model="form.firstname"
@@ -45,8 +59,8 @@ const submit = () => {
               />
             </v-col>
             <v-col
-              cols="12"
               class="mt-0"
+              cols="12"
             >
               <v-text-field
                 v-model="form.lastname"
@@ -56,27 +70,30 @@ const submit = () => {
               />
             </v-col>
             <v-col
-              cols="12"
               class="mt-0"
+              cols="12"
             >
               <v-text-field
                 v-model="form.email"
-                :rules="[$validationRules.required]"
+                :rules="[$validationRules.required, $validationRules.email]"
                 label="E-mail"
                 required
               />
             </v-col>
             <v-col
-              cols="12"
               class="mt-0"
+              cols="12"
             >
-              <v-btn type="submit" style="width: 100%" color="primary">
+              <v-btn
+                color="primary"
+                style="width: 100%"
+                type="submit"
+              >
                 Submit
-              </v-btn>
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-form>
-    </v-card-text>
-  </v-card>
-</template>
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-form>
+  </v-card-text>
+</v-card></template>
