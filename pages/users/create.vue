@@ -1,6 +1,6 @@
 <script setup>
 useHead({
-  title: 'Create user',
+	title: 'Create user',
 });
 const form = ref({});
 const isFormValid = ref(false);
@@ -9,12 +9,12 @@ const { addUser } = useUsers();
 const router = useRouter();
 
 const submit = async () => {
-  if (!isFormValid.value) {
-    return;
-  }
+	if (!isFormValid.value) {
+		return;
+	}
 
-  await addUser(form.value)
-  await router.push('/users');
+	await addUser(form.value);
+	await router.push('/users');
 };
 </script>
 
@@ -79,7 +79,8 @@ const submit = async () => {
               </v-btn>
             </v-col>
           </v-row>
-      </v-container>
-    </v-form>
-  </v-card-text>
-</v-card></template>
+        </v-container>
+      </v-form>
+    </v-card-text>
+  </v-card>
+</template>

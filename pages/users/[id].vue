@@ -2,8 +2,8 @@
 const form = ref({});
 const { $validationRules } = useNuxtApp();
 const {
-  getUserById,
-  updateUserById
+	getUserById,
+	updateUserById,
 } = useUsers();
 const route = useRoute();
 const router = useRouter();
@@ -12,23 +12,23 @@ const userId = Number(route.params.id);
 const isFormValid = ref(false);
 
 onMounted(() => {
-  getUserById(userId).then((user) => {
-    if (user) {
-      form.value = user;
-      useHead({
-        title: `Editing: ${user.firstname} ${user.lastname}`,
-      });
-    }
-  });
+	getUserById(userId).then((user) => {
+		if (user) {
+			form.value = user;
+			useHead({
+				title: `Editing: ${user.firstname} ${user.lastname}`,
+			});
+		}
+	});
 });
 
 const submit = async () => {
-  if (!isFormValid.value) {
-    return;
-  }
+	if (!isFormValid.value) {
+		return;
+	}
 
-  await updateUserById(userId, form.value)
-  await router.push('/users');
+	await updateUserById(userId, form.value);
+	await router.push('/users');
 };
 </script>
 
@@ -90,10 +90,11 @@ const submit = async () => {
                 type="submit"
               >
                 Submit
-            </v-btn>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-form>
-  </v-card-text>
-</v-card></template>
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-form>
+    </v-card-text>
+  </v-card>
+</template>
