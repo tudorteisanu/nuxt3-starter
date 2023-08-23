@@ -8,7 +8,7 @@ useHead({
   <v-card>
     <v-card-title>
       <span class="text-h2 text-bold">
-        About us
+        {{ $t('pages.about.title') }}
       </span>
     </v-card-title>
     <v-card-text>

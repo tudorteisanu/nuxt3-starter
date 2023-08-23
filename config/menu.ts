@@ -1,18 +1,18 @@
 export const sideMenu = [
 	{
-		title: 'Home',
+		title: 'menu.home',
 		to: '/',
 		icon: 'mdi-home',
 		value: 'home',
 	},
 	{
-		title: 'About',
+		title: 'menu.about',
 		value: 'about',
 		to: '/about',
 		icon: 'mdi-information-outline',
 	},
 	{
-		title: 'Users',
+		title: 'menu.users',
 		value: 'users',
 		to: '/users',
 		icon: 'mdi-account-multiple',

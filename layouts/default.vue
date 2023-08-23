@@ -1,3 +1,12 @@
+<script setup lang="ts">
+import { sideMenu } from '@/config/menu';
+const localPath = useLocalePath();
+const drawer = ref(true);
+const toggle = () => {
+	drawer.value = !drawer.value;
+};
+</script>
+
 <template>
   <v-card>
     <v-layout>
@@ -20,10 +29,10 @@
         >
           <v-list-item
             v-for="item in sideMenu"
-            :key="item.title"
+            :key="item.value"
             :prepend-icon="item.icon"
-            :to="item.to"
-            :title="item.title"
+            :to="localPath(item.to)"
+            :title="$t(item.title)"
           />
         </v-list>
       </v-navigation-drawer>
@@ -38,7 +47,9 @@
             data-test="menu-toggle"
             @click.stop="toggle()"
           />
-          <v-toolbar-title>My files</v-toolbar-title>
+          <v-toolbar-title>
+            My files <LangSwitcher />
+          </v-toolbar-title>
           <v-spacer />
           <v-btn
             variant="text"
@@ -60,12 +71,3 @@
     </v-layout>
   </v-card>
 </template>
-
-<script setup>
-import { sideMenu } from '@/config/menu';
-
-const drawer = ref(true);
-const toggle = () => {
-	drawer.value = !drawer.value;
-};
-</script>

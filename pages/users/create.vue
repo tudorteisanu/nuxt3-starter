@@ -24,7 +24,7 @@ const submit = async () => {
     class="mx-auto mt-10"
   >
     <v-card-title class="text-center">
-      Create User
+      {{ $t('pages.createUser.title') }}
     </v-card-title>
     <v-card-text>
       <v-form
@@ -40,7 +40,7 @@ const submit = async () => {
               <v-text-field
                 v-model="form.firstname"
                 :rules="[$validationRules.required]"
-                label="First name"
+                :label="$t('pages.createUser.form.firstName')"
                 required
               />
             </v-col>
@@ -51,7 +51,7 @@ const submit = async () => {
               <v-text-field
                 v-model="form.lastname"
                 :rules="[$validationRules.required]"
-                label="Last name"
+                :label="$t('pages.createUser.form.lastName')"
                 required
               />
             </v-col>
@@ -62,7 +62,7 @@ const submit = async () => {
               <v-text-field
                 v-model="form.email"
                 :rules="[$validationRules.required, $validationRules.email]"
-                label="E-mail"
+                :label="$t('pages.createUser.form.email')"
                 required
               />
             </v-col>
@@ -75,7 +75,7 @@ const submit = async () => {
                 style="width: 100%"
                 color="primary"
               >
-                Submit
+                {{ $t('pages.createUser.form.submit') }}
               </v-btn>
             </v-col>
           </v-row>

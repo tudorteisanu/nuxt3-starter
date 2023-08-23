@@ -9,7 +9,7 @@ useHead({
     <v-card-title>
       <div class="d-flex justify-between">
         <v-btn to="/users/create" color="primary">
-          Create User
+          {{ $t('pages.users.create') }}
         </v-btn>
         <div class="ml-auto">
           <v-icon>mdi-filter</v-icon>
