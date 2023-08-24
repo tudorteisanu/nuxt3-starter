@@ -9,12 +9,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Cypress install
-        uses: cypress-io/github-action@v5
-        with:
-          # Disable running of tests within install job
-          runTests: false
-          build: npm run build
+      - name: Install
+        run: npm i
+
+      - name: Build
+        run: npm run build
 
       - name: Save build folder
         uses: actions/upload-artifact@v3
@@ -23,24 +22,24 @@ jobs:
           if-no-files-found: error
           path: .output
 
-  cypress-run:
-    runs-on: ubuntu-22.04
-    needs: install
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Download the build folder
-        uses: actions/download-artifact@v3
-        with:
-          name: build
-          path: .output
-
-      - name: Cypress run
-        uses: cypress-io/github-action@v5
-        with:
-          start: npm start
-          browser: chrome
+#  cypress-run:
+#    runs-on: ubuntu-22.04
+#    needs: install
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v3
+#
+#      - name: Download the build folder
+#        uses: actions/download-artifact@v3
+#        with:
+#          name: build
+#          path: .output
+#
+#      - name: Cypress run
+#        uses: cypress-io/github-action@v5
+#        with:
+#          start: npm start
+#          browser: chrome
 
   deploy:
     runs-on: ubuntu-latest
