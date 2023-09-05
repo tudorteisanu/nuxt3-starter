@@ -1,5 +1,5 @@
-import { resolve } from 'path';
-import { UserInterface } from 'types/user.interface';
+import { useUsersStore } from '~/store/users';
+import { UserInterface } from '~/types/user.interface';
 import { Ref, ref } from 'vue';
 
 interface UpdateUserComposableInterface {
@@ -9,7 +9,7 @@ interface UpdateUserComposableInterface {
 
 export const useFetchUserById = (): UpdateUserComposableInterface => {
 	const isLoading: Ref<boolean> = ref(false);
-	const { getUserById, setUsers } = useUsers();
+	const { getUserById } = useUsersStore();
 	const data: any = ref(undefined);
 
 	const fetchUserById = (id: number): Promise<UserInterface> => {
@@ -22,13 +22,14 @@ export const useFetchUserById = (): UpdateUserComposableInterface => {
 			return new Promise(resolve => resolve(user));
 		}
 
-		return new Promise((resolve) => {
-			setTimeout(() => {
-				const newUser = { id, firstname: 'Test', lastname: 'test', email: 'test@email.ri' };
-				setUsers([newUser]);
-				isLoading.value = false;
-				resolve(newUser);
-			}, 1000);
+		return new Promise((resolve, reject) => {
+			reject('False');
+			// setTimeout(() => {
+			// 	const newUser = { id, firstname: 'Test', lastname: 'test', email: 'test@email.ri' };
+			// 	setUsers([newUser]);
+			// 	isLoading.value = false;
+			// 	resolve(newUser);
+			// }, 1000);
 		});
 	};
 

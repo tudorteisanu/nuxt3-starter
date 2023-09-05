@@ -1,6 +1,7 @@
 import { Ref, ref } from 'vue';
 import { UserInterface } from 'types/user.interface';
 import { users } from '~/settings/data/users';
+import { useUsersStore } from '~/store/users';
 
 interface FetchUsersComposableInterface {
 	isLoading: Ref<boolean>;
@@ -10,7 +11,8 @@ interface FetchUsersComposableInterface {
 export const useFetchUsers = (): FetchUsersComposableInterface => {
 	const data = ref<UserInterface[]>([]);
 	const isLoading: Ref<boolean> = ref(false);
-	const { setUsers } = useUsers();
+	const { setUsers } = useUsersStore();
+
 	const fetchUsers = (): Promise<void> => {
 		isLoading.value = true;
 

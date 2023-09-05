@@ -35,7 +35,7 @@
 					"getters"
 				],
 				"ignoreFunctionTypeParameterNameValueShadow": true,
-				"hoist": "never",
+				"hoist": "never"
 			}
 		],
 		"no-bitwise": "off",
@@ -47,7 +47,7 @@
 			{
 				"vars": "all",
 				"args": "after-used",
-				"ignoreRestSiblings": false,
+				"ignoreRestSiblings": false
 			}
 		],
 		"@typescript-eslint/explicit-module-boundary-types": [
@@ -56,7 +56,7 @@
 				"allowedNames": [
 					"state",
 					"use"
-				],
+				]
 			}
 		],
 		"space-before-function-paren": [
@@ -64,7 +64,7 @@
 			{
 				"anonymous": "always",
 				"named": "never",
-				"asyncArrow": "always",
+				"asyncArrow": "always"
 			}
 		],
 		"comma-dangle": [
@@ -74,7 +74,7 @@
 				"objects": "always-multiline",
 				"imports": "only-multiline",
 				"exports": "only-multiline",
-				"functions": "never",
+				"functions": "never"
 			}
 		],
 		"vue/multi-word-component-names": "off",
@@ -83,6 +83,6 @@
 			{
 				"allowModifiers": true
 			}
-		],
-	},
+		]
+	}
 }

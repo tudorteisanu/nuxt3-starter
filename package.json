@@ -9,15 +9,14 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "prepare": "husky install",
-    "lint": "eslint . --fix",
+    "lint": "npm version",
     "start": "node .output/server/index.mjs"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.22.9",
+    "@mdi/font": "^7.2.96",
     "@nuxt/devtools": "latest",
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
-    "@types/node": "^18.17.1",
-    "@mdi/font": "^7.2.96",
     "cypress": "^12.17.3",
     "eslint": "^8.46.0",
     "husky": "^8.0.3",
@@ -25,8 +24,11 @@
     "sass": "^1.64.2"
   },
   "dependencies": {
+    "@nuxtjs/i18n": "^8.0.0-beta.10",
+    "@pinia/nuxt": "^0.4.11",
+    "@sentry/browser": "^7.66.0",
     "axios": "^1.4.0",
-    "vuetify": "^3.3.14",
-    "@nuxtjs/i18n": "^8.0.0-beta.10"
+    "pinia": "^2.1.6",
+    "vuetify": "^3.3.14"
   }
 }

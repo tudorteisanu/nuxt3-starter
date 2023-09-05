@@ -1,8 +1,6 @@
-import { version } from '../package.json';
-
 const runtimeConfig = {
 	public: {
-		version,
+		sentryDsn: process.env.NUXT_PUBLIC_SENTRY_DSN,
 	},
 };
 

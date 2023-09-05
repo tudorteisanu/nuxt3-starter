@@ -1,9 +1,11 @@
 <script setup>
+import { useUsersStore } from '~/store/users';
+
 const form = ref({});
 const { $validationRules } = useNuxtApp();
 const {
 	getUserById,
-} = useUsers();
+} = useUsersStore();
 const { isLoading, fetchUserById } = useFetchUserById();
 const { isSubmitting, updateUserById } = useUpdateUser();
 const route = useRoute();

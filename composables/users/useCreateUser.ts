@@ -1,4 +1,5 @@
-import { CreateUserInterface, UserInterface } from 'types/user.interface';
+import { useUsersStore } from '~/store/users';
+import { CreateUserInterface, UserInterface } from '~/types/user.interface';
 import { Ref, ref } from 'vue';
 
 interface UpdateUserComposableInterface {
@@ -8,17 +9,22 @@ interface UpdateUserComposableInterface {
 
 export const useCreateUser = (): UpdateUserComposableInterface => {
 	const isSubmitting: Ref<boolean> = ref(false);
-	const { addUser } = useUsers();
+	const usersStore = useUsersStore();
 
-	const createUser = (payload: CreateUserInterface): Promise<void> => {
+	const createUser = async (payload: CreateUserInterface): Promise<void> => {
 		isSubmitting.value = true;
+		try {
+			const user: UserInterface = {
+				...payload,
+				id: usersStore.items.length
+			}
 
-		return new Promise((resolve) => {
-			setTimeout(() => {
-				addUser(payload);
-				resolve();
-			}, 1000);
-		});
+			usersStore.addUser(user);
+		} catch (e: any) {
+			throw e.response
+		} finally {
+			isSubmitting.value = false
+		}
 	};
 
 	return {

@@ -11,12 +11,17 @@ const { createUser, isSubmitting } = useCreateUser();
 const router = useRouter();
 
 const submit = async () => {
-	if (!isFormValid.value) {
+  try {
+    if (!isFormValid.value) {
 		return;
 	}
 
 	await createUser(form.value);
 	await router.push('/users');
+  } catch(e) {
+    console.log(e);
+    
+  }
 };
 </script>
 

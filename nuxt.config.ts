@@ -34,5 +34,12 @@ export default defineNuxtConfig({
 	build: {
 		transpile: ['vuetify'],
 	},
-	modules: ['@nuxtjs/i18n'],
+	modules: [
+		'@nuxtjs/i18n',
+		'@pinia/nuxt',
+	],
+	sourcemap: {
+		client: true,
+		server: true,
+	},
 });

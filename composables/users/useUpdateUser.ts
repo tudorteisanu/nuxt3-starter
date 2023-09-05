@@ -1,4 +1,5 @@
-import { UserInterface } from 'types/user.interface';
+import { useUsersStore } from '~/store/users';
+import { UserInterface } from '~/types/user.interface';
 import { Ref, ref } from 'vue';
 
 interface UpdateUserComposableInterface {
@@ -8,14 +9,14 @@ interface UpdateUserComposableInterface {
 
 export const useUpdateUser = (): UpdateUserComposableInterface => {
 	const isSubmitting: Ref<boolean> = ref(false);
-	const { pathUserById } = useUsers();
+	const { updateUser } = useUsersStore();
 
 	const updateUserById = (id: number, payload: UserInterface): Promise<void> => {
 		isSubmitting.value = true;
 
 		return new Promise((resolve) => {
 			setTimeout(() => {
-				pathUserById(id, payload);
+				updateUser(id, payload);
 				resolve();
 			}, 1000);
 		});

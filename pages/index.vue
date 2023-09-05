@@ -1,6 +1,5 @@
 <script setup>
 definePageMeta({
-	layout: 'default',
 	middleware: ['auth'],
 });
 useHead({
@@ -11,7 +10,7 @@ useHead({
 <template>
   <div>
     <div>
-      <Counter />
+      <h1>Home page</h1>
     </div>
   </div>
 </template>

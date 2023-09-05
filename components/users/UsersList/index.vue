@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const { data, headers } = useUsers();
+import { headers } from '~/settings/data/users';
+import { useUsersStore } from '~/store/users';
+const usersStore = useUsersStore()
 const { isLoading: isRemovingUser, removeUser } = useRemoveUser();
 const itemsPerPage = ref(10);
 </script>
@@ -8,7 +10,7 @@ const itemsPerPage = ref(10);
   <v-data-table
     v-model:items-per-page="itemsPerPage"
     :headers="headers"
-    :items="data"
+    :items="usersStore.items"
     :loading="isRemovingUser"
   >
     <template #item.actions="{item}">
