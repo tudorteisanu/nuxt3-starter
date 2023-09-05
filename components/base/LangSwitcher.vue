@@ -1,22 +1,28 @@
 <script setup>
 const { locales, locale, setLocale } = useI18n();
 
-const language = computed({
-	get: () => locale.value,
-	set: (value) => {
-		setLocale(value);
-	},
-});
 </script>
 
 <template>
-  <select v-model="language">
-    <option
-      v-for="item in locales"
-      :key="item.code"
-      :value="item.code"
-    >
-      {{ item.code }}
-    </option>
-  </select>
+  <v-menu>
+    <template #activator="{ props }">
+      <v-btn
+        v-bind="props"
+      >
+        <span class="font-bold">
+          {{ locale.toUpperCase() }}
+        </span>
+      </v-btn>
+    </template>
+    <v-list>
+      <v-list-item
+        v-for="item in locales"
+        :key="item.code"
+        :value="item.code"
+        @click="setLocale(item.code)"
+      >
+        <v-list-item-title>{{ item.code.toUpperCase() }}</v-list-item-title>
+      </v-list-item>
+    </v-list>
+  </v-menu>
 </template>

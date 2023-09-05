@@ -1,5 +1,5 @@
-import { HeaderInterface } from 'types/header.interface';
-import { UserInterface } from 'types/user.interface';
+import { HeaderInterface } from '~/types/header.interface';
+import { UserInterface } from '~/types/user.interface';
 
 const headers: HeaderInterface<UserInterface>[] = [
 	{

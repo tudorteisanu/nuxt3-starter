@@ -1,4 +1,4 @@
-import { sideMenu } from '../../config/menu';
+import { sideMenu } from '../../settings/menu';
 
 describe('template spec', () => {
 	it('Counter test cases', () => {

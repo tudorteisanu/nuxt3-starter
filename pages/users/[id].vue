@@ -3,8 +3,9 @@ const form = ref({});
 const { $validationRules } = useNuxtApp();
 const {
 	getUserById,
-	updateUserById,
 } = useUsers();
+const { isLoading, fetchUserById } = useFetchUserById();
+const { isSubmitting, updateUserById } = useUpdateUser();
 const route = useRoute();
 const router = useRouter();
 const userId = Number(route.params.id);
@@ -12,14 +13,24 @@ const userId = Number(route.params.id);
 const isFormValid = ref(false);
 
 onMounted(() => {
-	getUserById(userId).then((user) => {
-		if (user) {
-			form.value = user;
+	const user = getUserById(userId);
+
+	if (!user) {
+		fetchUserById(userId).then((data) => {
+			form.value = data;
 			useHead({
-				title: `Editing: ${user.firstname} ${user.lastname}`,
+				title: `Editing: ${data.firstname} ${data.lastname}`,
 			});
-		}
-	});
+		});
+		return;
+	}
+
+	if (user) {
+		form.value = user;
+		useHead({
+			title: `Editing: ${user.firstname} ${user.lastname}`,
+		});
+	}
 });
 
 const submit = async () => {
@@ -36,13 +47,15 @@ const submit = async () => {
   <v-card
     class="mx-auto mt-10"
     style="max-width: 400px;"
+    :loading="isLoading"
   >
     <v-card-title class="text-center">
       Edit User
     </v-card-title>
     <v-card-text>
       <v-form
-        v-model="valid"
+        v-model="isFormValid"
+        :disabled="isLoading"
         @submit.prevent="submit"
       >
         <v-container>
@@ -88,6 +101,7 @@ const submit = async () => {
                 color="primary"
                 style="width: 100%"
                 type="submit"
+                :loading="isSubmitting"
               >
                 Submit
               </v-btn>

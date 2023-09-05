@@ -1,11 +1,13 @@
-<script setup>
+<script setup lang="ts">
+import { CreateUserInterface } from 'types/user.interface';
+
 useHead({
 	title: 'Create user',
 });
-const form = ref({});
+const form = ref({} as CreateUserInterface);
 const isFormValid = ref(false);
 const { $validationRules } = useNuxtApp();
-const { addUser } = useUsers();
+const { createUser, isSubmitting } = useCreateUser();
 const router = useRouter();
 
 const submit = async () => {
@@ -13,7 +15,7 @@ const submit = async () => {
 		return;
 	}
 
-	await addUser(form.value);
+	await createUser(form.value);
 	await router.push('/users');
 };
 </script>
@@ -41,7 +43,6 @@ const submit = async () => {
                 v-model="form.firstname"
                 :rules="[$validationRules.required]"
                 :label="$t('pages.createUser.form.firstName')"
-                required
               />
             </v-col>
             <v-col
@@ -52,7 +53,6 @@ const submit = async () => {
                 v-model="form.lastname"
                 :rules="[$validationRules.required]"
                 :label="$t('pages.createUser.form.lastName')"
-                required
               />
             </v-col>
             <v-col
@@ -63,7 +63,7 @@ const submit = async () => {
                 v-model="form.email"
                 :rules="[$validationRules.required, $validationRules.email]"
                 :label="$t('pages.createUser.form.email')"
-                required
+                type="email"
               />
             </v-col>
             <v-col
@@ -74,6 +74,7 @@ const submit = async () => {
                 type="submit"
                 style="width: 100%"
                 color="primary"
+                :loading="isSubmitting"
               >
                 {{ $t('pages.createUser.form.submit') }}
               </v-btn>

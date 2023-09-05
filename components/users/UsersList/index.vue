@@ -1,8 +1,15 @@
+<script setup lang="ts">
+const { data, headers } = useUsers();
+const { isLoading: isRemovingUser, removeUser } = useRemoveUser();
+const itemsPerPage = ref(10);
+</script>
+
 <template>
   <v-data-table
     v-model:items-per-page="itemsPerPage"
     :headers="headers"
     :items="data"
+    :loading="isRemovingUser"
   >
     <template #item.actions="{item}">
       <v-btn
@@ -25,12 +32,3 @@
     </template>
   </v-data-table>
 </template>
-
-<script setup lang="ts">
-onMounted(() => {
-	fetchUsers();
-});
-
-const { data, headers, removeUser, fetchUsers } = useUsers();
-const itemsPerPage = ref(10);
-</script>

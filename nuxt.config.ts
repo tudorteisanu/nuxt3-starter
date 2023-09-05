@@ -1,13 +1,31 @@
-import { version } from './package.json';
+import { defineNuxtConfig } from 'nuxt/config';
+import i18nConfig from './config/i18n.config';
+import runtimeConfig from './config/runtime.config';
+import viteConfig from './config/vite.config';
+import appConfig from './config/app.config';
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+	runtimeConfig,
+	app: appConfig,
+	vite: viteConfig,
+	i18n: i18nConfig,
 	ssr: true,
+	telemetry: false,
 	devtools: { enabled: true },
 	components: [{
 		path: '~/components',
 		pathPrefix: false,
 	}],
+	imports: {
+		dirs: [
+			'composables',
+			// ... or scan modules nested one level deep with a specific name and file extension
+			'composables/*/index.{ts,js,mjs,mts}',
+			// ... or scan all modules within given directory
+			'composables/**',
+		],
+	},
 	css: [
 		'@/assets/scss/app.scss',
 		'vuetify/lib/styles/main.sass',
@@ -16,48 +34,5 @@ export default defineNuxtConfig({
 	build: {
 		transpile: ['vuetify'],
 	},
-	vite: {
-		define: {
-			'process.env.DEBUG': false,
-		},
-		css: {
-			devSourcemap: true,
-			preprocessorOptions: {
-				scss: {
-					additionalData: '@import "@/assets/scss/_variables.scss";',
-				},
-			},
-		},
-	},
-	runtimeConfig: {
-		public: {
-			version,
-		},
-	},
 	modules: ['@nuxtjs/i18n'],
-	i18n: {
-		baseUrl: 'http://localhost:3000',
-		lazy: true,
-		langDir: 'locales/',
-		strategy: 'prefix_except_default',
-		locales: [
-			{
-				code: 'en',
-				iso: 'en-US',
-				name: 'English(US)',
-				file: 'en.ts',
-			},
-			{
-				code: 'ru',
-				iso: 'ru-RU',
-				name: 'Russian',
-				file: 'ru.ts',
-			},
-		],
-		defaultLocale: 'en',
-		vueI18n: {
-			fallbackLocale: 'en',
-			legacy: false,
-		},
-	},
 });

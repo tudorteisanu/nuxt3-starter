@@ -1,11 +1,17 @@
-<script setup>
+<script setup lang="ts">
 useHead({
 	title: 'Users',
+});
+
+const { isLoading, fetchUsers } = useFetchUsers();
+
+onMounted(() => {
+	fetchUsers();
 });
 </script>
 
 <template>
-  <v-card>
+  <v-card :loading="isLoading">
     <v-card-title>
       <div class="d-flex justify-between">
         <v-btn to="/users/create" color="primary">

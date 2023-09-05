@@ -1,6 +1,5 @@
-import { ref } from 'vue';
 import axios from 'axios';
-import { UserInterface } from '@/types/user.interface';
+import { UserInterface } from '~/types/user.interface';
 
 interface AuthInterface {
 	isLoggedIn: Ref<boolean>;

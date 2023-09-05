@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { sideMenu } from '@/config/menu';
+import { sideMenu } from '~/settings/menu';
 const localPath = useLocalePath();
 const drawer = ref(true);
 const toggle = () => {
@@ -48,17 +48,14 @@ const toggle = () => {
             @click.stop="toggle()"
           />
           <v-toolbar-title>
-            My files <LangSwitcher />
+            My files
           </v-toolbar-title>
           <v-spacer />
           <v-btn
             variant="text"
             icon="mdi-magnify"
           />
-          <v-btn
-            variant="text"
-            icon="mdi-filter"
-          />
+          <LangSwitcher />
           <v-btn
             variant="text"
             icon="mdi-dots-vertical"
