@@ -19,13 +19,16 @@ const form: Ref<CreateUserInterface> = ref({
 });
 const { $validationRules } = useNuxtApp();
 
-const { register } = useAuth();
+const registerComposable = useRegister();
+
+const validationErrors = reactive(registerComposable.validationErrors)
 const onSubmit = async () => {
   if (!valid.value) {
     return;
   }
 
-  await register({ ...form.value, roles: ['user'] });
+  await registerComposable.register({ ...form.value, roles: ['user'] });
+  
 };
 </script>
 
@@ -51,6 +54,7 @@ const onSubmit = async () => {
                 ]"
                 label="First name"
                 required
+                :error-messages="validationErrors.firstName"
               />
             </v-col>
             <v-col
@@ -59,13 +63,13 @@ const onSubmit = async () => {
             >
               <v-text-field
                 v-model="form.lastName"
+                :error-messages="validationErrors.lastName"
                 :rules="[
                   $validationRules.required,
                   $validationRules.minLength(2),
                   $validationRules.maxLength(256),
                 ]"
                 label="Last name"
-                required
               />
             </v-col>
             <v-col
@@ -79,7 +83,7 @@ const onSubmit = async () => {
                   $validationRules.email,
                 ]"
                 label="E-mail"
-                required
+                :error-messages="validationErrors.email"
               />
             </v-col>
             <v-col
@@ -94,8 +98,8 @@ const onSubmit = async () => {
                   $validationRules.minLength(8)
                 ]"
                 label="Password"
-                required
                 type="password"
+                :error-messages="validationErrors.firstName"
               />
             </v-col>
             <v-col

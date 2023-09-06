@@ -6,7 +6,6 @@ interface AuthInterface {
 	login: (user: UserInterface) => void;
 	logout: () => void;
 	check: (token: string) => Promise<void>;
-	register: (user: CreateUserInterface) => Promise<void>;
 }
 
 
@@ -23,24 +22,6 @@ export const useAuth = (): AuthInterface => {
 
 			authStore.login(data.value as CredentialsInterface)
 			router.push('/')
-		}
-		catch (e) {
-			throw e
-		}
-	};
-
-	const register = async (user: CreateUserInterface): Promise<void> => {
-		try {
-			const { data, error } = await useFetch<CredentialsInterface>('https://shoply-api.nanoit.dev/api/auth/register', {
-				body: user,
-				method: "POST",
-			})
-
-			if (error.value) {
-				return;
-			}
-
-			router.push('/login')
 		}
 		catch (e) {
 			throw e
@@ -73,5 +54,5 @@ export const useAuth = (): AuthInterface => {
 		currentUser.value = data.value
 	}
 
-	return { login, logout, register, check };
+	return { login, logout, check };
 };
