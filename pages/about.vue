@@ -1,6 +1,9 @@
 <script setup lang="ts">
 useHead({
-	title: 'About',
+  title: 'About',
+});
+definePageMeta({
+  middleware: ['auth'],
 });
 </script>
 
@@ -25,8 +28,8 @@ useHead({
             <v-img
               class="align-end text-white"
               height="200"
-              src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
               cover
+              src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
             >
               <v-card-title>Top 10 Australian beaches</v-card-title>
             </v-img>

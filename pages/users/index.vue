@@ -2,7 +2,9 @@
 useHead({
 	title: 'Users',
 });
-
+definePageMeta({
+	middleware: ['auth'],
+});
 const { isLoading, fetchUsers } = useFetchUsers();
 
 onMounted(() => {

@@ -1,16 +1,20 @@
 <script setup>
 useHead({
-	title: 'Login',
+  title: 'Login',
+});
+definePageMeta({
+  layout: 'auth',
+  middleware: 'auth',
 });
 const form = ref({
-	password: '1s2ASD3d4@5678',
-	email: 'test@domain.com',
+  password: '1s2ASD3d4@5678',
+  email: 'test@domain.com',
 });
 const { $validationRules } = useNuxtApp();
 const { login } = useAuth();
 
 const submit = () => {
-	login(form.value);
+  login(form.value);
 };
 </script>
 

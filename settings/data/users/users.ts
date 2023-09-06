@@ -4,8 +4,8 @@ const users: UserInterface[] = [
 	...new Array(50),
 ].map((_, id) => ({
 	id,
-	firstname: `firstname ${id + 1}`,
-	lastname: `lastname ${id + 1}`,
+	firstName: `firstname ${id + 1}`,
+	lastName: `lastname ${id + 1}`,
 	email: `email${id + 1}@example.com`,
 }));
 

@@ -1,7 +1,6 @@
 import { Ref, ref } from 'vue';
-import { UserInterface } from 'types/user.interface';
+import { UserInterface } from '~/types/user.interface';
 import { users } from '~/settings/data/users';
-import { useUsersStore } from '~/store/users';
 
 interface FetchUsersComposableInterface {
 	isLoading: Ref<boolean>;

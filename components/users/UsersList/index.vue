@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { headers } from '~/settings/data/users';
-import { useUsersStore } from '~/store/users';
+
 const usersStore = useUsersStore()
 const { isLoading: isRemovingUser, removeUser } = useRemoveUser();
 const itemsPerPage = ref(10);

@@ -1,4 +1,3 @@
-import { useUsersStore } from '~/store/users';
 import { Ref, ref } from 'vue';
 
 interface RemoveUserComposableInterface {

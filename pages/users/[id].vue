@@ -1,6 +1,7 @@
 <script setup>
-import { useUsersStore } from '~/store/users';
-
+definePageMeta({
+	middleware: ['auth'],
+});
 const form = ref({});
 const { $validationRules } = useNuxtApp();
 const {
@@ -67,7 +68,7 @@ const submit = async () => {
               cols="12"
             >
               <v-text-field
-                v-model="form.firstname"
+                v-model="form.firstName"
                 :rules="[$validationRules.required, $validationRules.minLength(2)]"
                 label="First name"
                 required
@@ -78,7 +79,7 @@ const submit = async () => {
               cols="12"
             >
               <v-text-field
-                v-model="form.lastname"
+                v-model="form.lastName"
                 :rules="[$validationRules.required]"
                 label="Last name"
                 required

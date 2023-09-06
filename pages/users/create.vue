@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { CreateUserInterface } from 'types/user.interface';
-
+definePageMeta({
+	middleware: ['auth'],
+});
 useHead({
 	title: 'Create user',
 });
@@ -19,8 +21,7 @@ const submit = async () => {
 	await createUser(form.value);
 	await router.push('/users');
   } catch(e) {
-    console.log(e);
-    
+    console.log('errr');
   }
 };
 </script>
@@ -45,7 +46,7 @@ const submit = async () => {
               class="mt-0"
             >
               <v-text-field
-                v-model="form.firstname"
+                v-model="form.firstName"
                 :rules="[$validationRules.required]"
                 :label="$t('pages.createUser.form.firstName')"
               />
@@ -55,7 +56,7 @@ const submit = async () => {
               class="mt-0"
             >
               <v-text-field
-                v-model="form.lastname"
+                v-model="form.lastName"
                 :rules="[$validationRules.required]"
                 :label="$t('pages.createUser.form.lastName')"
               />

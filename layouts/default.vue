@@ -1,10 +1,19 @@
 <script setup lang="ts">
+import { storeToRefs } from 'pinia';
 import { sideMenu } from '~/settings/menu';
 const localPath = useLocalePath();
 const drawer = ref(true);
 const toggle = () => {
 	drawer.value = !drawer.value;
 };
+const {currentUser} =  storeToRefs(useAuthStore());
+const userName = computed(()=> {
+  if (currentUser.value) {
+    return `${currentUser.value?.firstName} ${currentUser.value?.lastName}`
+  }
+
+  return null
+})
 </script>
 
 <template>
@@ -16,9 +25,16 @@ const toggle = () => {
       >
         <v-list>
           <v-list-item
-            title="Sandra Adams"
-            subtitle="sandra_a88@gmailcom"
+            v-if="userName"
+            :title="userName"
+            :subtitle="currentUser?.email"
             prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
+          />
+          <v-list-item
+            style="height: 50px;"
+            v-else
+            title=""
+            subtitle=""
           />
         </v-list>
         <v-divider />
@@ -56,10 +72,7 @@ const toggle = () => {
             icon="mdi-magnify"
           />
           <LangSwitcher />
-          <v-btn
-            variant="text"
-            icon="mdi-dots-vertical"
-          />
+          <Menu />
         </v-app-bar>
         <v-card-text>
           <slot />

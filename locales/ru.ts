@@ -5,6 +5,9 @@ export default {
 		users: 'Пользователи',
 	},
 	pages: {
+		home: {
+			title: 'Главная страница',
+		},
 		about: {
 			title: 'О нас',
 		},

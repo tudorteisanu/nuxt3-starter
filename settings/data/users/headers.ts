@@ -8,11 +8,11 @@ const headers: HeaderInterface<UserInterface>[] = [
 	},
 	{
 		title: 'First name',
-		key: 'firstname',
+		key: 'firstName',
 	},
 	{
 		title: 'Last name',
-		key: 'lastname',
+		key: 'lastName',
 	},
 	{
 		title: 'Email',

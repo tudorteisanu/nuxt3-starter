@@ -5,6 +5,9 @@ export default {
 		users: 'Users',
 	},
 	pages: {
+		home: {
+			title: 'Home page',
+		},
 		about: {
 			title: 'About us',
 		},

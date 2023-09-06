@@ -1,16 +1,20 @@
 <script setup>
+import { storeToRefs } from 'pinia';
+
 definePageMeta({
-	middleware: ['auth'],
+  middleware: ['auth'],
 });
 useHead({
-	title: 'Home',
+  title: 'Home',
 });
+const user = storeToRefs(useAuthStore());
 </script>
 
 <template>
   <div>
     <div>
-      <h1>Home page</h1>
+      <h1>{{ $t('pages.home.title') }}</h1>
+      <pre>{{ user }}</pre>
     </div>
   </div>
 </template>

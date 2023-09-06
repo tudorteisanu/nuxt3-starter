@@ -1,4 +1,3 @@
-import { useUsersStore } from '~/store/users';
 import { UserInterface } from '~/types/user.interface';
 import { Ref, ref } from 'vue';
 
