@@ -1,12 +1,14 @@
 export interface UserInterface {
-	id: number;
-	firstName: string;
-	lastName: string;
-	email: string;
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
 }
 
 export interface CreateUserInterface {
-	firstName: string;
-	lastName: string;
-	email: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  roles: Array<string>;
+  password: string;
 }

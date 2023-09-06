@@ -16,7 +16,7 @@ export const useAuthStore = defineStore('auth', (): AuthStoreStateInterface => {
     const token: Ref<string | null> = ref(null);
 
     const login = ({ user, accessToken }: CredentialsInterface) => {
-        const token = useCookie('token'); // useCookie new hook in nuxt 3
+        const token = useCookie('token');
         token.value = accessToken;
         currentUser.value = user;
         isLoggedIn.value = true;

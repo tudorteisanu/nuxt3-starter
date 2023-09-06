@@ -2,9 +2,16 @@ import { storeToRefs } from 'pinia';
 // import { UserInterface } from '~/types'
 
 export default defineNuxtPlugin(async () => {
-  const cookieToken = useCookie('token');
-  const { currentUser, isLoggedIn, token } = storeToRefs(useAuthStore())
+  const cookieToken = useCookie('token', {
+    watch: true,
+    httpOnly: true,
+  });
+  const { currentUser, token } = storeToRefs(useAuthStore())
   const { check } = useAuth()
+
+  watch(cookieToken, (newToken) => {
+    token.value = newToken
+  })
 
   // Skip if already initialized on server
   if (currentUser.value) {
@@ -14,11 +21,4 @@ export default defineNuxtPlugin(async () => {
   if (cookieToken.value) {
     await check(cookieToken.value)
   }
-  // const { data: newUser } = await check(cookieToken.value)
-
-  // if (newUser) {
-  //   currentUser.value = newUser.value
-  //   isLoggedIn.value = true;
-  //   token.value = cookieToken.value
-  // }
 });

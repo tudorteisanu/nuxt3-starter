@@ -63,6 +63,12 @@ const submit = () => {
               <v-btn type="submit" style="width: 100%" color="primary">
                 Submit
               </v-btn>
+              <div class="mt-4 text-right">
+                <span>Need an account?</span>
+                <nuxt-link to="/register">
+                  Sign Up
+                </nuxt-link>
+              </div>
             </v-col>
           </v-row>
         </v-container>

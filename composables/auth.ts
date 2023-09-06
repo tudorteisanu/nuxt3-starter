@@ -1,11 +1,12 @@
-import { UserInterface } from '~/types/user.interface';
+import { CreateUserInterface, UserInterface } from '~/types/user.interface';
 import type { CredentialsInterface } from '~/types';
 import { storeToRefs } from 'pinia';
 
 interface AuthInterface {
 	login: (user: UserInterface) => void;
 	logout: () => void;
-	check: (token: string) => Promise<UserInterface>;
+	check: (token: string) => Promise<void>;
+	register: (user: CreateUserInterface) => Promise<void>;
 }
 
 
@@ -28,13 +29,31 @@ export const useAuth = (): AuthInterface => {
 		}
 	};
 
+	const register = async (user: CreateUserInterface): Promise<void> => {
+		try {
+			const { data, error } = await useFetch<CredentialsInterface>('https://shoply-api.nanoit.dev/api/auth/register', {
+				body: user,
+				method: "POST",
+			})
+
+			if (error.value) {
+				return;
+			}
+
+			router.push('/login')
+		}
+		catch (e) {
+			throw e
+		}
+	};
+
 	const logout = () => {
 		authStore.logout();
 		router.push('/login')
 	};
 
-	const check = async (token: string): Promise<UserInterface> => {
-		const { data } = await useFetch<UserInterface>('https://shoply-api.nanoit.dev/api/auth/user-info', {
+	const check = async (token: string): Promise<void> => {
+		const { data, error } = await useFetch<UserInterface>('https://shoply-api.nanoit.dev/api/auth/user-info', {
 			headers: {
 				authorization: `Bearer ${token}`
 			},
@@ -42,13 +61,17 @@ export const useAuth = (): AuthInterface => {
 
 		const { currentUser } = storeToRefs(useAuthStore());
 
+		if (error.value) {
+			authStore.isLoggedIn = false;
+			authStore.token = null;
+			currentUser.value = null;
+			return
+		}
+
 		authStore.isLoggedIn = true;
 		authStore.token = token;
 		currentUser.value = data.value
-
-
-		return data.value as UserInterface
 	}
 
-	return { login, logout, check };
+	return { login, logout, register, check };
 };
