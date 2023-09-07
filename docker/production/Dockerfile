@@ -1,4 +1,4 @@
-FROM node:18.14.2-slim
+FROM node:hydrogen-bookworm-slim
 
 ENV NODE_ENV=production
 ENV PORT=3000
