@@ -1,5 +1,4 @@
 import { storeToRefs } from 'pinia';
-// import { UserInterface } from '~/types'
 
 export default defineNuxtPlugin(async () => {
   const cookieToken = useCookie('token', {
@@ -19,6 +18,6 @@ export default defineNuxtPlugin(async () => {
   }
 
   if (cookieToken.value) {
-    await check(cookieToken.value)
+    await check(cookieToken.value);
   }
 });

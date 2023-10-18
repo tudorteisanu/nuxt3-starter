@@ -11,4 +11,5 @@ export interface CreateUserInterface {
   email: string;
   roles: Array<string>;
   password: string;
+  passwordConfirm: string;
 }

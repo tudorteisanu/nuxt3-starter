@@ -1,27 +1,23 @@
 export default {
-	menu: {
-		home: 'Home',
-		about: 'About',
-		users: 'Users',
-	},
-	pages: {
-		home: {
-			title: 'Home page',
-		},
-		about: {
-			title: 'About us',
-		},
-		users: {
-			create: 'Users create',
-		},
-		createUser: {
-			title: 'Create user',
-			form: {
-				firstName: 'First name',
-				lastName: 'Last name',
-				email: 'Email',
-				submit: 'Submit',
-			},
-		},
-	},
+  menu: {
+    home: 'Home',
+    users: 'Users',
+  },
+  pages: {
+    home: {
+      title: 'Home page',
+    },
+    users: {
+      create: 'Users create',
+    },
+    createUser: {
+      title: 'Create user',
+      form: {
+        firstName: 'First name',
+        lastName: 'Last name',
+        email: 'Email',
+        submit: 'Submit',
+      },
+    },
+  },
 };

@@ -1,30 +1,30 @@
 import { CreateUserInterface } from '~/types/user.interface';
-import type { CredentialsInterface } from '~/types';
+import useApi from '~/composables/api';
+import { useForm } from 'vee-validate';
+import registerForm from '~/settings/forms/registerForm';
 
-interface RegisterComposableInterface {
-    register: (user: CreateUserInterface) => Promise<void>;
-    validationErrors: Ref<CreateUserInterface>;
+interface UseRegisterInterface {
+  register: () => void;
+  isSubmitting: Ref<boolean>
 }
 
+export const useRegister = (): UseRegisterInterface => {
+  const router = useRouter();
+  const api = useApi();
+  const { handleSubmit, setErrors, isSubmitting } = useForm<CreateUserInterface>(registerForm);
 
-export const useRegister = (): RegisterComposableInterface => {
-    const validationErrors: any = ref({});
-    const router = useRouter()
+  const register = handleSubmit(async (values) => {
+    const { error } =  await api.post('/auth/register', { ...values, roles: ['user'] });
 
-    const register = async (body: CreateUserInterface) => {
-        const { error: serverError } = await useFetch<CredentialsInterface>('https://shoply-api.nanoit.dev/api/auth/register', {
-            body,
-            method: "POST",
-        })
-
-        if (serverError?.value?.statusCode === 422) {
-            validationErrors.value = serverError?.value?.data.errors
-            return;
-        }
-
-        router.push('/login')
+    if (!error?.value?.data) {
+      router.push('/')
+      return;
     }
 
-    return { register, validationErrors };
-};
+    if(error.value.data.errors) {
+      setErrors(error.value.data.errors);
+    }
+  });
 
+  return { register, isSubmitting };
+};

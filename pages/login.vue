@@ -1,4 +1,6 @@
 <script setup>
+import { useLogin } from '~/composables/auth/useLogin';
+
 useHead({
   title: 'Login',
 });
@@ -6,16 +8,7 @@ definePageMeta({
   layout: 'auth',
   middleware: 'auth',
 });
-const form = ref({
-  password: '1s2ASD3d4@5678',
-  email: 'test@domain.com',
-});
-const { $validationRules } = useNuxtApp();
-const { login } = useAuth();
-
-const submit = () => {
-  login(form.value);
-};
+const { login, isSubmitting } = useLogin();
 </script>
 
 <template>
@@ -24,43 +17,35 @@ const submit = () => {
       Create User
     </v-card-title>
     <v-card-text>
-      <v-form @submit.prevent="submit">
+      <v-form @submit.prevent="login()">
         <v-container>
           <v-row>
             <v-col
-              cols="12"
-              class="mt-0"
-            >
-              <v-text-field
-                v-model="form.email"
-                :rules="[
-                  $validationRules.required,
-                  $validationRules.email,
-                ]"
-                label="E-mail"
-                required
-              />
+            cols="12"
+             class="mt-0">
+              <base-text-field
+              label="Email"
+              name="email"
+              type="email"
+               />
+            </v-col>
+            <v-col cols="12"
+            class="mt-0">
+            <base-text-field
+              label="Password"
+              name="password"
+              type="password"
+               />
             </v-col>
             <v-col
-              cols="12"
-              class="mt-0"
-            >
-              <v-text-field
-                v-model="form.password"
-                :rules="[
-                  $validationRules.required,
-                  $validationRules.maxLength(256),
-                  $validationRules.minLength(8)
-                ]"
-                label="Password"
-                type="password"
-              />
-            </v-col>
-            <v-col
-              cols="12"
-              class="mt-0"
-            >
-              <v-btn type="submit" style="width: 100%" color="primary">
+            cols="12"
+             class="mt-0">
+              <v-btn
+              type="submit"
+               style="width: 100%"
+               color="primary"
+              :loading="isSubmitting"
+              >
                 Submit
               </v-btn>
               <div class="mt-4 text-right">

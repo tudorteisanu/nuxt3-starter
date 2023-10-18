@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { headers } from '~/settings/data/users';
-
+const isRemovingUser = false;
 const usersStore = useUsersStore()
-const { isLoading: isRemovingUser, removeUser } = useRemoveUser();
+const removeUser = (data) => {
+  console.log(data);
+}
 const itemsPerPage = ref(10);
 </script>
 
@@ -16,7 +18,7 @@ const itemsPerPage = ref(10);
     <template #item.actions="{item}">
       <v-btn
         :to="`/users/${item.raw.id}`"
-        flat
+        :flat="true"
       >
         <v-icon
           size="small"
